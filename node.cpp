@@ -198,6 +198,10 @@ int Node::nextMove() {
     int w = 0;
     int best = INT32_MIN;
     for (int i = 1; i <= TABLE_WIDTH; i++) {
+        if (m_table[i - 1].size() >= TABLE_HIGHT) {
+            continue;
+        }
+
         vector<int> win;
         vector<int> lose;
 
@@ -208,10 +212,6 @@ int Node::nextMove() {
         }
 
         if (lose.size() && *min_element(lose.begin(), lose.end()) == 2) {
-            continue;
-        }
-
-        if (m_table[i - 1].size() >= TABLE_HIGHT) {
             continue;
         }
 
