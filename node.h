@@ -25,7 +25,7 @@ private:
     bool backslashMatch(bool cl, int w);
     bool horizontalMatch(bool cl, int w);
 
-    void findMatch(std::vector<int>& win, std::vector<int>& lose, bool cl, int w, int d);
+    void findMatch(std::vector<int>& win, std::vector<int>& lose, int w, int d);
 };
 
 #endif // NODE_H
