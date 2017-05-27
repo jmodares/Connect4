@@ -164,30 +164,30 @@ bool Node::matchCell(bool cl, int w) {
     return false;
 }
 
-void Node::findMatch(vector<int>& win, vector<int>& lose, bool cl, int w, int d) {
+void Node::findMatch(vector<int>& win, vector<int>& lose, int w, int d) {
     if (d > AI_DEPTH) {
         return;
     }
 
-    bool c = false;
+    bool cl = false;
 
     if (d % 2) {
-        c = true;
+        cl = true;
     }
 
-    if (!addCell(c, w)) {
+    if (!addCell(cl, w)) {
         return;
     }
 
-    if (matchCell(c, w)) {
-        if (c != cl) {
-            lose.push_back(d);
-        } else {
+    if (matchCell(cl, w)) {
+        if (cl) {
             win.push_back(d);
+        } else {
+            lose.push_back(d);
         }
     } else {
         for (int i = 1; i <= TABLE_WIDTH; i++) {
-            findMatch(win, lose, cl, i, d + 1);
+            findMatch(win, lose, i, d + 1);
         }
     }
 
@@ -205,7 +205,7 @@ int Node::nextMove() {
         vector<int> win;
         vector<int> lose;
 
-        findMatch(win, lose, true, i, 1);
+        findMatch(win, lose, i, 1);
 
         if (win.size() && *min_element(win.begin(), win.end()) == 1) {
             return i;
